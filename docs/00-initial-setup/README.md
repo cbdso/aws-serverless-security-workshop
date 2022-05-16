@@ -422,8 +422,10 @@ In addition to the lambda code, the configurations for Lambda function and the R
 1. In the terminal, set the bash variables:
 
 	```
-	REGION=`ec2-metadata -z | awk '{print $2}' | sed 's/[a-z]$//'`
+	cbpnreddy: Unable to use this command to set the region instead set it using REGION=us-east-1
+	REGION=`ec2-metadata -z | awk '{print $2}' | sed 's/[a-z]$//'`  
 	BUCKET=<use the DeploymentS3Bucket from the CloudFormation output>
+	ENV=<username for creating the unique stack>
 	```
 	
 1. Ensure you are in the `src` folder:
@@ -441,7 +443,9 @@ In addition to the lambda code, the configurations for Lambda function and the R
 1. Deploy the serverless API using the following command. Note that this template references the output from the setup CloudFormation stack (`Secure-Serverless`) for things like subnet IDs. 
 
 	```
-	aws cloudformation deploy --template-file packaged.yaml --stack-name CustomizeUnicorns --region $REGION --capabilities CAPABILITY_IAM --parameter-overrides InitResourceStack=Secure-Serverless
+	cbpnreddy: Use the ENV variable to create unique stack
+	aws cloudformation deploy --template-file packaged.yaml --stack-name $ENV-CustomizeUnicorns --region $REGION --capabilities CAPABILITY_IAM --parameter-overrides InitResourceStack=Secure-Serverless
+	cbpnreddy: Use the <username> as InitResourceStack
 	```
 
 1. Wait until you see the stack is successfully deployed:
@@ -449,7 +453,7 @@ In addition to the lambda code, the configurations for Lambda function and the R
 	```
 	Waiting for changeset to be created..
 	Waiting for stack create/update to complete
-	Successfully created/updated stack - CustomizeUnicorns
+	Successfully created/updated stack - $ENV-CustomizeUnicorns cbpnreddy made changes to the name
 	```
 
 1. You can gather the base endpoint of the serverless API we just deployed from the output of the CloudFormation stack. 
