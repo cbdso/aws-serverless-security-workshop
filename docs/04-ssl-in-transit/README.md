@@ -69,7 +69,7 @@ aws cloudformation package --output-template-file packaged.yaml --template-file 
 
 Once this is done, you should be able to connect to the database using SSL.
 
-## Ensure SSL - Optional step
+## Ensure SSL - Optional step (CONSIDER REMOVE??? STACK DOES NOT INCLUDE encrypted_user account)
 
 You can require SSL connections for specific users accounts\. For example, you can use one of the following statements, depending on your MySQL version, to require SSL connections on the user account `encrypted_user`\.
 
