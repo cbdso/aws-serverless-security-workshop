@@ -25,7 +25,7 @@ This information should be in our request body to create a new customization tha
 
 By leveraging input validation on API Gateway, you can enforce required parameters and regex patterns each parameter must adhere to. This allows you to remove boilerplate validation logic from backend implementations and focus on actual business logic and deep validation.
 
-## Module 3 - Optional: attack your API with SQL injection! 
+## Module 3 - Optional: attack your API with SQL injection! (CONSIDER REMOVING)
 
 If you haven't completed **Module 6: WAF**, your serverless API is currently vulnerable to SQL injection attacks. This optional module shows how you can perform the attack. 
 
@@ -147,7 +147,7 @@ For our **POST /customizations** API, we are going to use the following model:
 Now, follow these steps:
 
 1. Go to API Gateway console.
-2. Click on the API **CustomizeUnicorns**
+2. Click on the API you created **USERNAME-CustomizeUnicorns**
 3. Click on **Models**
 4. Click on **Create** and create a model with the following values:
 	- Model name: `CustomizationPost`
@@ -159,7 +159,7 @@ Now, follow these steps:
 
 Once we have created our model, we need to apply it to our customizations/post method.
 
-1. Within the API Gateway Console, click on CustomizeUnicorns, **Resources**
+1. Within the API Gateway Console, click on USERNAME-CustomizeUnicorns, **Resources**
 1. Click under /customizations --> **POST** method
 
 	![Customizations ](images/06_customizations.png)
