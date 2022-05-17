@@ -91,6 +91,23 @@ To find the MySQL version of the Aurora database, go to the RDS console and find
 
 ![](images/check-engine-version.png)
 
+Set the password for  encrypted_user. Use Corp123!
+
+SET PASSWORD FOR 'encrypted_user'@'%' = PASSWORD('Corp123!');
+
+Exit the SQL connection for admin and attempt to establish an unencrypted connection with the encrypted_user account with the following command. Replace the Aurora endpoint with the one the primary instance endpoint copied into your scratch pad from the previous step.
+
+mysql -h <YOUR-AURORA-PRIMARY-INSTANCE-ENDPOINT> -u encrypted_user -p
+
+You should be prompted with a password. Use Corp123! After entering your password, it should fail with ERROR 1045 (28000): Access denied for user 'encrypted_user'@'10.0.1.156' (using password: YES). This is because an encrypted connection is expected and required for this account.
+
+**PW Notes: Verify SSL Login Steps--may need to check if complete**
+Connect to your database this time using encryption with the following command. Replace the Aurora endpoint with the one the primary instance endpoint copied into your scratch pad from Step 5.
+
+mysql -h <YOUR-AURORA-PRIMARY-INSTANCE-ENDPOINT> -u encrypted_user --ssl-ca=/home/ec2-user/environment/aws-serverless-security-workshop/src/app/assets/rds-ca-2019-root.pem -p
+
+You should be prompted with a password. Use Corp123! After entering your password, it should login successfully and present with a mysql> prompt.
+
 ## Next step 
 You have now further secured your data by enabling encryption in transit for your database connection! 
 
