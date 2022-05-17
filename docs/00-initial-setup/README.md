@@ -9,6 +9,11 @@ In this set up module, you will deploy a simple serverless application, which yo
 
 If you are completing this workshop at an AWS-sponsored event where an AWS account is provided for you, you will be using **AWS Event Engine**. In this case, the prerequisites is already met and you can move on to next step. 
 
+
+<strong>PW Notes</strong>
+
+**student name entered needs to match heroes username when creating environment**
+
 If you not not using AWS Event Engine, expand below to see prerequisites: 
 
 <details>
@@ -51,29 +56,26 @@ In addition, it also creates the below resources
 
 **Choose and click on the option below according to your situation and follow its instructions:**
 
-If you are completing this workshop at an AWS-sponsored event where an AWS account is provided for you, you will be using **AWS Event Engine**. Choose **Option 1** below. Otherwise, choose **Option 2**. 
+If you are completing this workshop via registered training, then your environment will already be provisioned for you. Otherwise, choose **Option 2**. 
 <details>
-<summary><strong> Option 1: If you are using AWS Event Engine </strong></summary><p>
-If you are using AWS Event Engine, an AWS CloudFormation stack should be automatically created for you.
+<summary><strong> Option 1: Pre-provisioned environment </strong></summary><p>
+An AWS CloudFormation stack should be automatically created for you.
  
+	<strong>PW Notes</strong>
+	
+	UPdate steps here. 
+	* No longer using eventengine
+	* stacks created will have diff names
+	* Note people can see everyone else's stack so they need to pick out their own
  
-1. Go to [https://dashboard.eventengine.run](https://dashboard.eventengine.run)
-1. In the next screen, put in the hash code you received from the event organizer, and click **Proceed**
+1. Work with instructor(s) to ensure you have access to the training environment
 
-   ![event-engine-login](images/00-event-engine-login.png)
-
-1. Log into the the AWS console in the event engine account by clicking on **AWS Console**
-
-   ![](images/00-event-engine-console-login.png)
-
-1. Click on **Open AWS Console** or use the **Copy Login Link** button and open the copied URL in **Chrome** or **Firefox**
-    
-    ![](images/00-event-engine-console-login-2.png)
+1. Log into the the AWS console 
     
 1. Type in `CloudFormation` in the **Find Services** search bar to go to the CloudFormation console
 1. You should see 2 stacks that have been created:
-   * one named something like `mod-3269ecbd5edf43ac` This is the ***main setup stack*** containing the setup resources.
-   * one with name similar to `aws-cloud9-Secure-Serverless-Cloud9-<alphanumeric-letters>`. This is a nested stack responsible for creating the Cloud9 environment.
+   * one named something like `USERNAME-serverless-security` This is the ***main setup stack*** containing the setup resources.
+   * one with name similar to `aws-cloud9-USERNAME-Secure-Serverless-<alphanumeric-letters>`. This is a nested stack responsible for creating the Cloud9 environment.
 1. Select the ***main setup stack*** (name starting with `mod-`), go to the **Outputs** tab. Keep this browser tab open as you go through rest of the workshop. 
 
     ![](images/00-ee-cloudformation.png)
@@ -131,6 +133,9 @@ As part of the above step, an [Cloud9 IDE instance](https://aws.amazon.com/cloud
 
 1. Under the *Secure-Serverless-Cloud9* environment, click on ***Open IDE***
 	
+	<strong>PW Notes</strong>
+	***this will be USERNAME-Secure-Serverless for the Cloud9 environment***
+	
 	![Cloud9 Open IDE](images/0C-open-ide.png)
 
 	If you have trouble opening cloud9, ensure you are using:
@@ -146,7 +151,10 @@ As part of the above step, an [Cloud9 IDE instance](https://aws.amazon.com/cloud
 
 1. We need to get the content of this workshop in this environment. In the Cloud9 terminal window, run the following command to clone this repository (bottom of the page):
 
-	`git clone https://github.com/aws-samples/aws-serverless-security-workshop.git`
+	<strong>PW Notes</strong>
+	
+	**make sure this is CB's github url**
+	`git clone https://github.com/cbdso/aws-serverless-security-workshop.git`
 
     ![](images/0B-clone-repo.png)
 
@@ -367,7 +375,7 @@ In addition to the lambda code, the configurations for Lambda function and the R
   </tr>
 </table>
 
-## Module-0E: Run your serverless application locally with SAM Local
+## Module-0E: Run your serverless application locally with SAM Local (MIGHT NEED TO REMOVE)
 
 1. After reviewing the code, under **src/app/dbUtils.js**, replace the *host* with the Aurora endpoint. Then save the file (⌘+s for Mac or Ctrl+s for Windows or File -> Save)
    
@@ -421,9 +429,14 @@ In addition to the lambda code, the configurations for Lambda function and the R
 
 1. In the terminal, set the bash variables:
 
+	<strong>PW Notes</strong>
+	
+	**May need to update to directly set REGION=us-east-1**
+	
 	```
 	REGION=`ec2-metadata -z | awk '{print $2}' | sed 's/[a-z]$//'`
 	BUCKET=<use the DeploymentS3Bucket from the CloudFormation output>
+	STUDENT=<use your Heroes username>
 	```
 	
 1. Ensure you are in the `src` folder:
@@ -440,8 +453,11 @@ In addition to the lambda code, the configurations for Lambda function and the R
 
 1. Deploy the serverless API using the following command. Note that this template references the output from the setup CloudFormation stack (`Secure-Serverless`) for things like subnet IDs. 
 
+	<strong>PW Notes</strong>
+	**InitResourceStack should be something else, USERNAME only (e.g. pwang) and stackname should be made unique--prefix with username maybe USERNAME-CustomizeUnicorns**
+	
 	```
-	aws cloudformation deploy --template-file packaged.yaml --stack-name CustomizeUnicorns --region $REGION --capabilities CAPABILITY_IAM --parameter-overrides InitResourceStack=Secure-Serverless
+	aws cloudformation deploy --template-file packaged.yaml --stack-name $STUDENT"-CustomizeUnicorns" --region $REGION --capabilities CAPABILITY_IAM --parameter-overrides InitResourceStack=$STUDENT
 	```
 
 1. Wait until you see the stack is successfully deployed:
@@ -454,19 +470,22 @@ In addition to the lambda code, the configurations for Lambda function and the R
 
 1. You can gather the base endpoint of the serverless API we just deployed from the output of the CloudFormation stack. 
 
+	<strong>PW Notes</strong>
+	**stackname should be made unique--prefix with username maybe USERNAME-CustomizeUnicorns**
+	
 	To do it from commandline:
 
 	```
-	aws cloudformation describe-stacks --region $REGION --stack-name CustomizeUnicorns --query "Stacks[0].Outputs[0].OutputValue" --output text
+	aws cloudformation describe-stacks --region $REGION --stack-name $STUDENT"-CustomizeUnicorns" --query "Stacks[0].Outputs[0].OutputValue" --output text
 	```
 
 	e.g.
 ```
-$ aws cloudformation describe-stacks --region $REGION --stack-name CustomizeUnicorns --query "Stacks[0].Outputs[0].OutputValue" --output text
+$ aws cloudformation describe-stacks --region $REGION --stack-name $STUDENT"-CustomizeUnicorns" --query "Stacks[0].Outputs[0].OutputValue" --output text
 https://rs86gmk5bf.execute-api.us-west-2.amazonaws.com/dev/
 ```
 	
-	Alternatively, you can go to the [CloudFormation Console](https://console.aws.amazon.com/cloudformation/home), find the `CustomizeUnicorns` stack and look in the **Output** tab
+	Alternatively, you can go to the [CloudFormation Console](https://console.aws.amazon.com/cloudformation/home), find the `USERNAME-CustomizeUnicorns` stack and look in the **Output** tab
 
 1. You can test in your browser (or `curl`) for the following APIs. Remember to append the API path (e.g. `/socks`) to the endpoint
 
@@ -514,7 +533,7 @@ We will use [**Postman**](https://www.getpostman.com/) for the rest of the works
 	* click on the **Import** button in postman
 	* Then use **Import from Link** and supply the below link:
 
-		`https://raw.githubusercontent.com/aws-samples/aws-serverless-security-workshop/master/src/test-events/Customize_Unicorns.postman_collection.json`
+		`https://raw.githubusercontent.com/cbdso/aws-serverless-security-workshop/master/src/test-events/Customize_Unicorns.postman_collection.json`
 	* Click on **Import**
 	
 		<img src="images/0F-import-postman.png" width="50%" />
