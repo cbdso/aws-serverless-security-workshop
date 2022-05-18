@@ -5,7 +5,7 @@ AWS WAF is a web application firewall that helps protect your web applications f
 
 In this module, you will create a WAF ACL and attach it to the API Gateway we created.
 
-### Module 6 - Optional: attack your API with SQL injection!
+### Module 6 - Optional: attack your API with SQL injection! (DELETE THIS SECTION)
 
 If you have completed **Module 3: Input validation on API Gateway**, your API now has some basic input validation in place for the JSON request body. However, it turns out our application is still vulnerable to SQL injection attacks as part of the request URI. This optional module shows how you can perform the attack.
 
@@ -85,11 +85,11 @@ Now let's start creating an AWS WAF to give us additional protection:
 	
 1. In Step 1 of the ACL creation wizard, fill in:
 
-	* **Web ACL Name**: `ProtectUnicorn`
+	* **Web ACL Name**: Prefix your Web ACL name with your USERNAME, e.g. `USERNAME-ProtectUnicorn`
 	* **CloudWatch metric name**: this should be automatically populated for you
 	* **Region**: select the AWS region you chose for previous steps of the workshop
 	* **Resource type to associate with web ACL**: Pick `API Gateway`
-	* **Amazon API Gateway API**: Pick the API Gateway we deployed previously, `CustomizeUnicorns`
+	* **Amazon API Gateway API**: Pick the API Gateway we deployed previously, e.g. `USERNAME-CustomizeUnicorns`
 	* **Stage**: select `dev`
 
 	![screenshot](images/web-acl-name.png)
@@ -101,7 +101,7 @@ Now let's start creating an AWS WAF to give us additional protection:
 1. Next you will create 2 different conditions. Let's start with a condition to restrict the maximum size of request body: 
 
 	* Go to **Size constraint conditions** section, click **Create condition**
-	* Give the condition a name, like `LargeBodyMatch`
+	* Give the condition a unique nameprefixed with your username, like `USERNAME-LargeBodyMatch`
 	* In Filter settings, add a filer on 
 		*  	**Part of the request to filter on**: body
 		*  **Comparison operator**: Greater than
@@ -115,7 +115,7 @@ Now let's start creating an AWS WAF to give us additional protection:
 1. Next, let's add a SQL injection condition. 
 
 	* Go to **SQL injection match conditions** section, click **Create condition**
-	* Give the condition a name, like `SQLinjectionMatch`
+	* Give the condition a unique name prefixed with your username, like `USERNAME-SQLinjectionMatch`
 	* Here, we want to add multiple rules to inspect multiple aspects of the request: request body, request URI and query strings 
 	* In the **Filter settings**, add 4 filters:
 
@@ -159,12 +159,12 @@ Now let's start creating an AWS WAF to give us additional protection:
 1.  Next, we create **Rules** that are composed of one or more **Conditions**. Let's start by creating a rule based on the request body size condition:
 
 	* Click **Create Rule** 
-	* Give it a name, like `LargeBodyMatchRule`
+	* Give it a unique name prefixed with your username, like `USERNAME-LargeBodyMatchRule`
 	* For 	**Rule type**, keep `Regular rule`
 	* In Add conditions section, select 
 		* 	`does`
 		*  `match at least one of the filters in the size constraint condition `
-		*  `LargeBodyMatch`  -- the name of the condition we created for large request body in 6B 
+		*  `USERNAME-LargeBodyMatch`  -- the name of the condition you created for large request body in 6B 
 
 	* Then click **Create** 
 	
@@ -173,12 +173,12 @@ Now let's start creating an AWS WAF to give us additional protection:
 1. Next, we create the rule for SQL injection. 
 
 	* Click **Create Rule** 
-	* Give it a name, like `SQLinjectionRule`
+	* Give it a unique name prefixed with your username, like `USERNAME-SQLinjectionRule`
 	* For **Rule type**, keep `Regular rule`
 	* In Add conditions section, select 
 		* 	`does`
 		*  `match at least one of the filters in the SQL injection match condition `
-		*  `SQlInjectionMatch`  -- the name of the condition we created for SQL injection in 6B 
+		*  `USERNAME-SQlInjectionMatch`  -- the name of the condition you created for SQL injection in 6B 
 	*  Then click **Create**
 
 	![screenshot](images/sql-rule.png)
@@ -186,7 +186,7 @@ Now let's start creating an AWS WAF to give us additional protection:
 1. Lastly, we can create a rate-based rule that prevents an overwhelming number of requests (either valid or invalid) from flooding our API:
 
 	* Click **Create Rule** 
-	* Give it a name, like `RequestFloodRule`
+	* Give it a unique name prefixed with your username, like `USERNAME-RequestFloodRule`
 	* For **Rule type**, select `Rate-based rule`
 	* For **Rate limit**, use `2000` 
 	*  Then click **Create**
