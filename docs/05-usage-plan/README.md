@@ -5,7 +5,7 @@ You can leverage Usage Plans with Amazon API Gateway to set limits on request ra
 To tally the number of requests based on the caller, API Gateway uses API Keys to keep track of different consumers for your API. In our use case, requests coming from different companies can be calculated separately. 
 
 ## Module 5A: Create an API Gateway usage plan 
-1. In the API Gateway console, go to **Usage Plans** tab, and click **Create** 
+1. In the API Gateway console, select the API you created (e.g. USERNAME-CustomizeUnicorns), go to **Usage Plans** tab, and click **Create** 
 1. Fill in the details for the usage plan 
 	
 	* **Name**: ```Basic```
@@ -19,7 +19,7 @@ To tally the number of requests based on the caller, API Gateway uses API Keys t
 	
 	Click **Next**
 	
-1. Associate the API we created previously with the usage plan. Pick `dev` stage. 
+1. Associate the API we created previously with the usage plan. Pick `dev` stage
 
 	![add stage to Usage plan](images/add-apig-stage.png)
 	
@@ -156,7 +156,7 @@ Now, deploy the changes and verify:
 	 aws cloudformation package --output-template-file packaged.yaml --template-file template.yaml --s3-bucket $BUCKET --s3-prefix securityworkshop --region $REGION &&  aws cloudformation  deploy --template-file packaged.yaml --stack-name CustomizeUnicorns --region $REGION --parameter-overrides InitResourceStack=Secure-Serverless --capabilities CAPABILITY_IAM
 	```
 
-1. Once the deployment completes, you can go the [API Gateway console](https://console.aws.amazon.com/apigateway/home), navigate to the **CustomizeUnicorns API** -> **Resources** --> Pick an method --> click on **Method Request**. 
+1. Once the deployment completes, you can go the [API Gateway console](https://console.aws.amazon.com/apigateway/home), navigate to your API **(e.g. USERNAME-CustomizeUnicorns API)**,  **Resources** --> Pick an method --> click on **Method Request**. 
 
 	You should now see the **API Key Required** field set to `true`
 
@@ -231,9 +231,9 @@ To make this work:
 
 You can use postman to send multiple API requests in sequence. 
 
-1. In postman, click on **Runner**
+1. In postman, click on the ellipses (3 dots) next to your collection (e.g. Customize_Unicorns) and click **Run Collection**
 
-1. Pick the `List customization options` folder to run
+1. Pick the APIs from `List customization options` folder to run (i.e. GET Socks-List, GET Horns-List, GET Glasses-List, GET Capes-List)
 
 1. Select the `dev` environment and set runner to run 10 iterations
 
