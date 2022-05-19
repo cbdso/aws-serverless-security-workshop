@@ -107,7 +107,7 @@ So now, let's get you a set of admin credentials with the `WildRydes/ManagePartn
 
 1. Click **Add an app client**
 
-1. Use `Admin` for app client name (For the **Auth Flows Configuration** section, you can either uncheck the ALLOW_CUSTOM_AUTH and ALLOW_USER_SRP_AUTH or leave it enabled. Enable token revocation under "Advanced Token Settings" can also be checked.)
+1. Use `Admin` for app client name (For the **Auth Flows Configuration** section, you can either uncheck the ALLOW_CUSTOM_AUTH and ALLOW_USER_SRP_AUTH or leave it enabled. **Enable token revocation** under **Advanced Token Settings** can also be checked.)
 
 	![add admin](images/cognito-add-admin.png)
 
