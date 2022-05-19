@@ -7,17 +7,12 @@ In this set up module, you will deploy a simple serverless application, which yo
 
 ## Prerequisites
 
-If you are completing this workshop at an AWS-sponsored event where an AWS account is provided for you, you will be using **AWS Event Engine**. In this case, the prerequisites is already met and you can move on to next step. 
+<strong>PW Notes</strong> **student name entered needs to match heroes username when creating environment**
 
-
-<strong>PW Notes</strong>
-
-**student name entered needs to match heroes username when creating environment**
-
-If you not not using AWS Event Engine, expand below to see prerequisites: 
+If you not not using working through this workshop as part of a registered course that provides some pre-provisioned assets for the training environment, expand below to see prerequisites: 
 
 <details>
-<summary><strong> Prerequisites if you are not using AWS Event Engine </strong></summary><p>
+<summary><strong> Prerequisites without pre-provisioned environment </strong></summary><p>
 
 
 ### AWS Account
@@ -73,10 +68,10 @@ An AWS CloudFormation stack should be automatically created for you.
 1. Log into the the AWS console 
     
 1. Type in `CloudFormation` in the **Find Services** search bar to go to the CloudFormation console
-1. You should see 2 stacks that have been created:
-   * one named something like `USERNAME-serverless-security` This is the ***main setup stack*** containing the setup resources.
+1. You should see 2 stacks that have been created per USERNAME:
+   * one named something like `USERNAME-serverless-security`. This is the ***main setup stack*** containing the setup resources.
    * one with name similar to `aws-cloud9-USERNAME-Secure-Serverless-<alphanumeric-letters>`. This is a nested stack responsible for creating the Cloud9 environment.
-1. Select the ***main setup stack*** (name starting with `mod-`), go to the **Outputs** tab. Keep this browser tab open as you go through rest of the workshop. 
+1. Select the ***main setup stack*** (name starting with your USERNAME), go to the **Outputs** tab. Keep this browser tab open as you go through rest of the workshop. 
 
     ![](images/00-ee-cloudformation.png)
     
