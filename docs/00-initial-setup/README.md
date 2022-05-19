@@ -7,8 +7,6 @@ In this set up module, you will deploy a simple serverless application, which yo
 
 ## Prerequisites
 
-<strong>PW Notes</strong> **student name entered needs to match heroes username when creating environment**
-
 If you not not using working through this workshop as part of a registered course that provides some pre-provisioned assets for the training environment, expand below to see prerequisites: 
 
 <details>
@@ -55,13 +53,7 @@ If you are completing this workshop via registered training, then your environme
 <details>
 <summary><strong> Option 1: Pre-provisioned environment </strong></summary><p>
 An AWS CloudFormation stack should be automatically created for you.
- 
-	<strong>PW Notes</strong>
-	
-	UPdate steps here. 
-	* No longer using eventengine
-	* stacks created will have diff names
-	* Note people can see everyone else's stack so they need to pick out their own
+
  
 1. Work with instructor(s) to ensure you have access to the training environment
 
