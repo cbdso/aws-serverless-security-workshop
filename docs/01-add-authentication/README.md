@@ -326,14 +326,11 @@ We need to configure a [**Lambda authorizer**](https://docs.aws.amazon.com/apiga
 	
 	otherwise, fix the syntax error before continuing to next step
 	
-	<strong>PW NOTES</strong>
 	
-	**User Env Variables in command to prefix stack name and use for InitResourceStack** 
-
 1.  Deploy the updates by running the same commands we used in module 0 to deploy the application:
 
 	```
-	 aws cloudformation package --output-template-file packaged.yaml --template-file template.yaml --s3-bucket $BUCKET --s3-prefix securityworkshop --region $REGION &&  aws cloudformation deploy --template-file packaged.yaml --stack-name CustomizeUnicorns --region $REGION --capabilities CAPABILITY_IAM --parameter-overrides InitResourceStack=Secure-Serverless
+	 aws cloudformation package --output-template-file packaged.yaml --template-file template.yaml --s3-bucket $BUCKET --s3-prefix securityworkshop --region $REGION &&  aws cloudformation deploy --template-file packaged.yaml --stack-name $STUDENT"-CustomizeUnicorns" --region $REGION --capabilities CAPABILITY_IAM --parameter-overrides InitResourceStack=$STUDENT
 	```
 
 1. After the SAM template has finished updating, go to the [API Gateway console](https://console.aws.amazon.com/apigateway) and click into the API we just updated (**make sure to select the correct one**). Under **Resources**, choose any method in the API, and you should see **Auth: CustomAuthorizer** under **Method Request**:
@@ -351,12 +348,11 @@ Now we have configured our API so only authenticated requests can get through to
 
 To make authenticated requests using the admin client credentials we just created in Module 1C, we can use PostMan:
 
-1. In Postman, click on the **Manage Partner** folder ~~and click **edit**~~
-1. In the Edit Folder window that pops up, go to **Authorization** tab, and change the Auth **Type** to `OAuth 2.0`, ~~then click **Get New Access Token** ~~
+1. In Postman, click on the **Manage Partner** folder 
+1. In the Edit Folder window that pops up, go to **Authorization** tab, and change the Auth **Type** to `OAuth 2.0`
 <strong>PW Notes</strong>
 **Best to update screencap here from later Postman versions**
 
-	![postman add auth](images/1E-postman-add-auth.png)
 
 1. Scroll down to "Configure New Token" and Configure the new token request:
 	
@@ -371,11 +367,12 @@ To make authenticated requests using the admin client credentials we just create
 	* **Client Secret**:  this the client secret of the admin we created in Module 1D
 	* **Scope**: it's optional (the token will be scoped anyways) we can leave it blank
 		
+	![postman add auth](images/1E-postman-add-auth.png)
 	![postman add auth](images/1E-postman-gettoken.png)
 
 	And click **Get New Access Token**.
 	
-	For the purposes of the workshop (not recommended for on-the-job use), if there is an error retrieving the token, try going to **File-->Settings** and make sure **SSL certificate verification** is **OFF**, or if in a registered workshop class, check course materials for configuration instructions.
+	For the purposes of the workshop (not recommended for on-the-job use), if there is an error retrieving the token, try going to **File->Settings** and make sure **SSL certificate verification** is **OFF**. Alternatively, if in a registered workshop class, check course materials for configuration instructions.
 
 1. Now you should see the new token returned from Cognito. Click **Use Token**
 
