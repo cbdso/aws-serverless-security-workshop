@@ -470,7 +470,7 @@ $ aws cloudformation describe-stacks --region $REGION --stack-name $STUDENT"-Cus
 https://rs86gmk5bf.execute-api.us-west-2.amazonaws.com/dev/
 ```
 	
-Alternatively, you can go to the [CloudFormation Console](https://console.aws.amazon.com/cloudformation/home), find the `USERNAME-CustomizeUnicorns` stack and look in the **Output** tab
+Alternatively, you can go to the [CloudFormation Console](https://console.aws.amazon.com/cloudformation/home), find the `<your USERNAME>-CustomizeUnicorns` stack that belongs to you, and look in the **Output** tab
 
 1. You can test in your browser (or `curl`) for the following APIs. Remember to append the API path (e.g. `/socks`) to the endpoint
 
@@ -512,7 +512,7 @@ Alternatively, you can go to the [CloudFormation Console](https://console.aws.am
 
 We will use [**Postman**](https://www.getpostman.com/) for the rest of the workshop for testing API requests. 
 
-1. If you don't have installed yet on your laptop, please download it at: [https://www.getpostman.com/](https://www.getpostman.com/)
+1. If you don't have installed yet on your laptop, please download it at: [https://www.postman.com/downloads/](https://www.postman.com/downloads/)
 1. To save you time, we created a Postman collection that you can use to test each of the APIs we are working with today. 
 
 	* click on the **Import** button in postman
