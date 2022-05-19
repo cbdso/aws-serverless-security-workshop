@@ -364,9 +364,9 @@ In addition to the lambda code, the configurations for Lambda function and the R
   </tr>
 </table>
 
+## Module-0E: This Section Under Construction. SKIP to Module-0F
 <!---
 THIS SECTION NEEDS UPDATES FOR AWS TOOLKIT
-## Module-0E: Run your serverless application locally with SAM Local (MIGHT NEED TO REMOVE)
 
 1. After reviewing the code, under **src/app/dbUtils.js**, replace the *host* with the Aurora endpoint. Then save the file (⌘+s for Mac or Ctrl+s for Windows or File -> Save)
    
