@@ -391,7 +391,7 @@ To make authenticated requests using the admin client credentials we just create
 Now we have a set of client credentials for the partner company you just registered. Let's pretend to be "Cherry company" (or whatever company you just registered) and submit some unicorn customizations!
 
 
-1. Request an access token from the new company client credentials you just generated. (You will notice this is very similar steps as you did in [module 1E](#1E)!
+1. Request an access token from the new company client credentials you just generated. (You will notice this is very similar steps as you did in [module 1E](#1E)!)
 
 	1. Click on the **Customize_Unicorns** collection and view the **Authorization** tab
 
