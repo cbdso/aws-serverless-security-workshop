@@ -49,7 +49,7 @@ Quick links to submodules:
 
 1. To configure the Cognito User Pool with a domain, go to the [Cognito management console](https://console.aws.amazon.com/cognito/home), and click on **Manage User Pools**
 
-1. Click on the user pool created by the SAM Template (`src/template.yaml`). It should be named "**USERNAME-CustomizeUnicorns-users**". Make sure to select the user pool with your prefixed username
+1. Click on the user pool created by the SAM Template (`src/template.yaml`). In an instructor-led workshop where environments are pre-provisioned, this should be named "**USERNAME-CustomizeUnicorns-users**". Make sure to select the user pool with your prefixed USERNAME!
 
 1. Under **App Integration**, go to the **Domain Name** tab to set up an unique Cognito domain our API consumers will use for authentication requests.
 
@@ -107,7 +107,7 @@ So now, let's get you a set of admin credentials with the `WildRydes/ManagePartn
 
 1. Click **Add an app client**
 
-1. Use `Admin` for app client name (For the **Auth Flows Configuration** section, you can either uncheck the ALLOW_CUSTOM_AUTH and ALLOW_USER_SRP_AUTH or leave it enabled)
+1. Use `Admin` for app client name (For the **Auth Flows Configuration** section, you can either uncheck the ALLOW_CUSTOM_AUTH and ALLOW_USER_SRP_AUTH or leave it enabled. Enable token revocation under "Advanced Token Settings" can also be checked.)
 
 	![add admin](images/cognito-add-admin.png)
 
