@@ -71,7 +71,7 @@ An AWS CloudFormation stack should be automatically created for you.
 1. You should see 2 stacks that have been created per USERNAME:
    * one named something like `USERNAME-serverless-security`. This is the ***main setup stack*** containing the setup resources.
    * one with name similar to `aws-cloud9-USERNAME-Secure-Serverless-<alphanumeric-letters>`. This is a nested stack responsible for creating the Cloud9 environment.
-1. Select the ***main setup stack*** (name starting with your USERNAME), go to the **Outputs** tab. Keep this browser tab open as you go through rest of the workshop. 
+1. Select the ***main setup stack*** (the stack name starting with your USERNAME), go to the **Outputs** tab. Keep this browser tab open as you go through rest of the workshop. 
 
     ![](images/00-ee-cloudformation.png)
     
@@ -126,11 +126,8 @@ As part of the above step, an [Cloud9 IDE instance](https://aws.amazon.com/cloud
 
 	<img src="images/0B-cloud9-environments.png" width="80%" />
 
-1. Under the *Secure-Serverless-Cloud9* environment, click on ***Open IDE***
-	
-	<strong>PW Notes</strong>
-	***this will be USERNAME-Secure-Serverless for the Cloud9 environment***
-	
+1. Under the *USERNAME-Secure-Serverless* environment, click on ***Open IDE***
+		
 	![Cloud9 Open IDE](images/0C-open-ide.png)
 
 	If you have trouble opening cloud9, ensure you are using:
@@ -145,10 +142,7 @@ As part of the above step, an [Cloud9 IDE instance](https://aws.amazon.com/cloud
 	Keep your AWS Cloud9 IDE opened in a tab throughout this workshop as you'll be using it for most all activities.
 
 1. We need to get the content of this workshop in this environment. In the Cloud9 terminal window, run the following command to clone this repository (bottom of the page):
-
-	<strong>PW Notes</strong>
 	
-	**make sure this is CB's github url**
 	`git clone https://github.com/cbdso/aws-serverless-security-workshop.git`
 
     ![](images/0B-clone-repo.png)
@@ -370,6 +364,8 @@ In addition to the lambda code, the configurations for Lambda function and the R
   </tr>
 </table>
 
+<!---
+THIS SECTION NEEDS UPDATES FOR AWS TOOLKIT
 ## Module-0E: Run your serverless application locally with SAM Local (MIGHT NEED TO REMOVE)
 
 1. After reviewing the code, under **src/app/dbUtils.js**, replace the *host* with the Aurora endpoint. Then save the file (⌘+s for Mac or Ctrl+s for Windows or File -> Save)
@@ -409,6 +405,7 @@ In addition to the lambda code, the configurations for Lambda function and the R
 	
 
 	This indicates that the application run successfully within your Cloud9 environment (locally). Now it's time to deploy your Serverless application!
+--->
 
 ## Module-0F: Deploy and test your Serverless application in the cloud
 
