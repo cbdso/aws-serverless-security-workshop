@@ -421,14 +421,11 @@ THIS SECTION NEEDS UPDATES FOR AWS TOOLKIT
 
 1. In the terminal, set the bash variables:
 
-	<strong>PW Notes</strong>
-	
-	**May need to update to directly set REGION=us-east-1**
 	
 	```
-	REGION=`ec2-metadata -z | awk '{print $2}' | sed 's/[a-z]$//'`
+	REGION=us-east-1
 	BUCKET=<use the DeploymentS3Bucket from the CloudFormation output>
-	STUDENT=<use your Heroes username>
+	STUDENT=<use your assigned USERNAME>
 	```
 	
 1. Ensure you are in the `src` folder:
@@ -443,10 +440,8 @@ THIS SECTION NEEDS UPDATES FOR AWS TOOLKIT
 	aws cloudformation package --template-file template.yaml --s3-bucket $BUCKET --output-template packaged.yaml
 	```
 
-1. Deploy the serverless API using the following command. Note that this template references the output from the setup CloudFormation stack (`Secure-Serverless`) for things like subnet IDs. 
+1. Deploy the serverless API using the following command. Note that this template references the output from the setup CloudFormation stack (`USERNAME-serverless-security`) for things like subnet IDs. 
 
-	<strong>PW Notes</strong>
-	**InitResourceStack should be something else, USERNAME only (e.g. pwang) and stackname should be made unique--prefix with username maybe USERNAME-CustomizeUnicorns**
 	
 	```
 	aws cloudformation deploy --template-file packaged.yaml --stack-name $STUDENT"-CustomizeUnicorns" --region $REGION --capabilities CAPABILITY_IAM --parameter-overrides InitResourceStack=$STUDENT
@@ -457,13 +452,11 @@ THIS SECTION NEEDS UPDATES FOR AWS TOOLKIT
 	```
 	Waiting for changeset to be created..
 	Waiting for stack create/update to complete
-	Successfully created/updated stack - CustomizeUnicorns
+	Successfully created/updated stack - USERNAME-CustomizeUnicorns
 	```
 
 1. You can gather the base endpoint of the serverless API we just deployed from the output of the CloudFormation stack. 
 
-	<strong>PW Notes</strong>
-	**stackname should be made unique--prefix with username maybe USERNAME-CustomizeUnicorns**
 	
 	To do it from commandline:
 
@@ -471,13 +464,13 @@ THIS SECTION NEEDS UPDATES FOR AWS TOOLKIT
 	aws cloudformation describe-stacks --region $REGION --stack-name $STUDENT"-CustomizeUnicorns" --query "Stacks[0].Outputs[0].OutputValue" --output text
 	```
 
-	e.g.
+	e.g. (Sample only, Do NOT Copy):
 ```
 $ aws cloudformation describe-stacks --region $REGION --stack-name $STUDENT"-CustomizeUnicorns" --query "Stacks[0].Outputs[0].OutputValue" --output text
 https://rs86gmk5bf.execute-api.us-west-2.amazonaws.com/dev/
 ```
 	
-	Alternatively, you can go to the [CloudFormation Console](https://console.aws.amazon.com/cloudformation/home), find the `USERNAME-CustomizeUnicorns` stack and look in the **Output** tab
+Alternatively, you can go to the [CloudFormation Console](https://console.aws.amazon.com/cloudformation/home), find the `USERNAME-CustomizeUnicorns` stack and look in the **Output** tab
 
 1. You can test in your browser (or `curl`) for the following APIs. Remember to append the API path (e.g. `/socks`) to the endpoint
 
