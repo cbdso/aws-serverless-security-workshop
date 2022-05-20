@@ -25,7 +25,7 @@ First thing we need to do is create a secret in Secrets Manager.
 		<img src="images/02-secret-select-db.png" width="60%"/>
 	
 1. Click on *Next* and continue fill the wizard with the following values. **If in a group workshop course, PREFIX with your username to create a unique value that won't conflict with others**
-	- Secret name: `USERNAME-secure-serverless-db-secret`
+	- Secret name: `USERNAME/secure-serverless-db-secret`
 	- Description: Use an optional description here.
 	![Secret name](images/03-secret-name.png)
 1. Again, click on *Next* and configure your rotation.
