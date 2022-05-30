@@ -458,7 +458,7 @@ THIS SECTION NEEDS UPDATES FOR AWS TOOLKIT
 
 	e.g. (Sample only, Do NOT Copy):
 ```
-$ aws cloudformation describe-stacks --region $REGION --stack-name $STUDENT"-CustomizeUnicorns" --query "Stacks[0].Outputs[0].OutputValue" --output text
+$ aws cloudformation describe-stacks --region $REGION --stack-name $STUDENT-CustomizeUnicorns --query "Stacks[0].Outputs[0].OutputValue" --output text
 https://rs86gmk5bf.execute-api.us-west-2.amazonaws.com/dev/
 ```
 	
