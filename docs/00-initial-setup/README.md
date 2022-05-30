@@ -411,7 +411,7 @@ THIS SECTION NEEDS UPDATES FOR AWS TOOLKIT
 
 	  ![CloudFormation output](images/0D-cloudformation-output-w-bucket-highlight.png)
 
-1. In the terminal, set the bash variables:
+1. In the terminal, set the bash variables (region can be set to your preferred region, e.g. us-west-2, eu-west-1, etc):
 
 	
 	```
