@@ -350,8 +350,6 @@ To make authenticated requests using the admin client credentials we just create
 
 1. In Postman, click on the **Manage Partner** folder 
 1. In the Edit Folder window that pops up, go to **Authorization** tab, and change the Auth **Type** to `OAuth 2.0`
-<strong>PW Notes</strong>
-**Best to update screencap here from later Postman versions**
 
 
 1. Scroll down to "Configure New Token" and Configure the new token request:
