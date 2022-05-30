@@ -436,7 +436,7 @@ THIS SECTION NEEDS UPDATES FOR AWS TOOLKIT
 
 	
 	```
-	aws cloudformation deploy --template-file packaged.yaml --stack-name $STUDENT"-CustomizeUnicorns" --region $REGION --capabilities CAPABILITY_IAM --parameter-overrides InitResourceStack=$STUDENT
+	aws cloudformation deploy --template-file packaged.yaml --stack-name $STUDENT-CustomizeUnicorns --region $REGION --capabilities CAPABILITY_IAM --parameter-overrides InitResourceStack=$STUDENT
 	```
 
 1. Wait until you see the stack is successfully deployed:
@@ -453,7 +453,7 @@ THIS SECTION NEEDS UPDATES FOR AWS TOOLKIT
 	To do it from commandline:
 
 	```
-	aws cloudformation describe-stacks --region $REGION --stack-name $STUDENT"-CustomizeUnicorns" --query "Stacks[0].Outputs[0].OutputValue" --output text
+	aws cloudformation describe-stacks --region $REGION --stack-name $STUDENT-CustomizeUnicorns --query "Stacks[0].Outputs[0].OutputValue" --output text
 	```
 
 	e.g. (Sample only, Do NOT Copy):
