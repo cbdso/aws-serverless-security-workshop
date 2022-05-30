@@ -63,7 +63,7 @@ In `src/template.yaml`, look for the block below that defines policies for Secre
 
 &#9888; **Note: ENSURE YOU REPLACE ALL 3 OCCURRENCES**!  &#9888;  
 
-Also, note that in the **Globals** section we are referencing the name of the secret. **REPLACE 'secure-serverless-db-secret' with the actual name of the Secret used. For instructor-led courses, the convention used would be '<YOUR USERNAME>/secure-serverless-db-secret'**
+Also, note that in the **Globals** section we are referencing the name of the secret. **REPLACE 'secure-serverless-db-secret' with the actual name of the Secret used. For instructor-led courses, the convention used would be** '''<YOUR USERNAME>/secure-serverless-db-secret'''
 
 ```
 Globals:
