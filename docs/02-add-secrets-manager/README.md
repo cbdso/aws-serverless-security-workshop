@@ -18,7 +18,7 @@ First thing we need to do is create a secret in Secrets Manager.
 2. Select ***Credentials for RDS database*** type of secret. Fill it with these values:
 	- Username: `admin`
 	- Password: `Corp123!`
-	- Select the encryption key: `DefaultEncryptionKey`.
+	- Select the encryption key: `aws/secretsmanager`.
 	![AWS Secrets Manager - Secret](images/01-store-new-secret.png)
 	- Select your Aurora cluster (starts with `USERNAME-serverless-security-aurora`)
 
