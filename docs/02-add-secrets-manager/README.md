@@ -34,7 +34,7 @@ First thing we need to do is create a secret in Secrets Manager.
 	- Choose **Create a rotation function**
 	- Give the lambda function a unique name prefixed with your USERNAME, e.g. `USERNAME-aurora-rotation`
 	- Select **No (Do not use separate credentials)**  for the purpose of this workshop. In practice, the credentials used to grant access to the database shouldn't have permissions to change its own password.
-	![Rotation](images/04-rotation.png)   **PW Notes: Update image**
+	![Rotation](images/04-rotation.png) 
 1. Then, click *Next* and, if you want, review the example code. During the next sections we will modify our code to use Secrets Manager and this code will be used as an example.
 1. Finally, click *Store*.
 
