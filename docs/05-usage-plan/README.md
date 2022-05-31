@@ -6,9 +6,9 @@ To tally the number of requests based on the caller, API Gateway uses API Keys t
 
 ## Module 5A: Create an API Gateway usage plan 
 1. In the API Gateway console, select the API you created (e.g. USERNAME-CustomizeUnicorns), go to **Usage Plans** tab, and click **Create** 
-1. Fill in the details for the usage plan 
+1. Fill in the details for the usage plan, ensuring to create a unique name for your usage plan: 
 	
-	* **Name**: ```Basic```
+	* **Name**: ```<Your Username>-Basic```
 	* **Description** : ```Basic usage plan for Unicorn customization partners```
 	* **Enable throttling**: check yes
 	* **Throttling Rate** : ```1``` request per second
