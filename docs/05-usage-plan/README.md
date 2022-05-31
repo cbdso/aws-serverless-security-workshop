@@ -35,7 +35,7 @@ To tally the number of requests based on the caller, API Gateway uses API Keys t
 	<details>
 	<summary><strong> If you have not done module 1, expand for instructions here </strong></summary>
 
-	* For Name, pick any name e.g.  `cherry company`. 
+	* For Name, pick any name e.g.  `USERNAME cherry company`. 
 	* For API Key, select **Auto Generate**
 	* Click **Save**
 
@@ -48,7 +48,7 @@ To tally the number of requests based on the caller, API Gateway uses API Keys t
 	
 	For our application, we are going to reuse the value of the ClientID of the customer as the value for the API Key, to keep down the number of random strings that customers have to remember. 
 	
-	* For Name, use the company name you created in **Module 1: Auth**. 
+	* For Name, you can use the company name you created in **Module 1: Auth**, but **ensure you prefix it with your username so it can be easily identified in a group workshop setting** 
 	* For API Key, select **Custom** so we can import the value
 	* In the inputbox that comes up, use the same value as the ClientID of the company (if you forgot it, you can retrieve it from the Cognito console and look under **App clients** tab
 	* Click **Save**
