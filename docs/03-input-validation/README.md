@@ -25,6 +25,7 @@ This information should be in our request body to create a new customization tha
 
 By leveraging input validation on API Gateway, you can enforce required parameters and regex patterns each parameter must adhere to. This allows you to remove boilerplate validation logic from backend implementations and focus on actual business logic and deep validation.
 
+<!---
 ## Module 3 - Optional: attack your API with SQL injection! (CONSIDER REMOVING)
 
 If you haven't completed **Module 6: WAF**, your serverless API is currently vulnerable to SQL injection attacks. This optional module shows how you can perform the attack. 
@@ -87,6 +88,7 @@ If you look at the SQL injection statement we just performed, it's adding a bad 
 ![](images/3A-after-injection.png)
 
 </details>
+--->
 
 ## Module 3A: Create a model for your Customizations
 
