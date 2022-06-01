@@ -5,6 +5,8 @@ AWS WAF is a web application firewall that helps protect your web applications f
 
 In this module, you will create a WAF ACL and attach it to the API Gateway we created.
 
+<!---
+
 ### Module 6 - Optional: attack your API with SQL injection! (DELETE THIS SECTION)
 
 If you have completed **Module 3: Input validation on API Gateway**, your API now has some basic input validation in place for the JSON request body. However, it turns out our application is still vulnerable to SQL injection attacks as part of the request URI. This optional module shows how you can perform the attack.
@@ -67,6 +69,8 @@ If you have completed **Module 3: Input validation on API Gateway**, your API no
 	```
 
 </details>
+
+--->
 
 ### Module 6A: Create a WAF ACL 
 
