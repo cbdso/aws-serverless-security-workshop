@@ -89,11 +89,11 @@ Now let's start creating an AWS WAF to give us additional protection:
 	
 1. In Step 1 of the ACL creation wizard, fill in:
 
-	* **Web ACL Name**: Prefix your Web ACL name with your USERNAME, e.g. `USERNAME-ProtectUnicorn`
+	* **Web ACL Name**: Prefix your Web ACL name with your USERNAME, e.g. `<USERNAME>-ProtectUnicorn`
 	* **CloudWatch metric name**: this should be automatically populated for you
 	* **Region**: select the AWS region you chose for previous steps of the workshop
 	* **Resource type to associate with web ACL**: Pick `API Gateway`
-	* **Amazon API Gateway API**: Pick the API Gateway we deployed previously, e.g. `USERNAME-CustomizeUnicorns`
+	* **Amazon API Gateway API**: Pick the API Gateway we deployed previously, e.g. `<USERNAME>-CustomizeUnicorns`
 	* **Stage**: select `dev`
 
 	![screenshot](images/web-acl-name.png)
