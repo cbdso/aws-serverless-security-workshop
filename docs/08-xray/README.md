@@ -115,7 +115,7 @@ If you have gone through [**Module 2: Secrets**](../02-add-secrets-manager), you
 1. Once the deployment finishes, test making API requests again with postman. 
 
 1. Go to the [**X-Ray console**](https://console.aws.amazon.com/xray/home), go to the **Service map** tab and refresh. You should start seeing some lambda requests getting captured! 
-2. 	**PW Notes: You may need to click through an initial set up wizard. Click 'Get Started', select 'Instrument your application', click Next, select 'Node.js', Click Next, and click Done.**
+2. 	**Note:** You may need to click through an initial set up wizard. Click 'Get Started', select 'Instrument your application', click Next, select 'Node.js', Click Next, and click Done.
 
 
 ## Module 8D: Enable X-Ray on API Gateway
