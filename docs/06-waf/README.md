@@ -105,7 +105,7 @@ Now let's start creating an AWS WAF to give us additional protection:
 1. Next you will create 2 different conditions. Let's start with a condition to restrict the maximum size of request body: 
 
 	* Go to **Size constraint conditions** section, click **Create condition**
-	* Give the condition a unique nameprefixed with your username, like `USERNAME-LargeBodyMatch`
+	* Give the condition a unique name prefixed with your username, like `USERNAME-LargeBodyMatch`
 	* In Filter settings, add a filer on 
 		*  	**Part of the request to filter on**: body
 		*  **Comparison operator**: Greater than
