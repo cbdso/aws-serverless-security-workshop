@@ -168,7 +168,7 @@ To initialize your database:
 
 1. Connect to your cluster with the following command. Replace the Aurora endpoint with the one you copied into your scratch pad.
 
-	`mysql -h <YOUR-AURORA-SERVERLESS-ENDPOINT> -u admin -p`
+	`mysql -h <YOUR-AURORA-SERVERLESS-ENDPOINT> -u admin -p unicorn_customization`
 
 	You should be prompted with a password. Use *`Corp123!`* (If during Module-0A, you customized the password to something else, use the one you specified).
 
