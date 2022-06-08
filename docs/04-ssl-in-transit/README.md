@@ -82,7 +82,7 @@ SET PASSWORD FOR 'encrypted_user'@'%' = PASSWORD('Corp123!');
 
 Exit the SQL connection for admin and attempt to establish an unencrypted connection with the encrypted_user account with the following command. Replace the Aurora endpoint with the one the primary instance endpoint copied into your scratch pad from the previous step.
 
-mysql -h <YOUR-AURORA-PRIMARY-INSTANCE-ENDPOINT> -u encrypted_user -p
+`mysql -h <YOUR-AURORA-PRIMARY-INSTANCE-ENDPOINT> -u encrypted_user -p`
 
 You should be prompted with a password. Use `Corp123!`
 This connection attempt should work. Type `exit` to drop the mysql connection.
