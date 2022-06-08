@@ -71,6 +71,10 @@ Once this is done, you should be able to connect to the database using SSL.
 
 ## Ensure SSL - Optional step (CONSIDER REMOVE??? STACK DOES NOT INCLUDE encrypted_user account)
 
+First, establish a mysql connection with the admin account:
+
+```mysql -h <YOUR-AURORA-PRIMARY-INSTANCE-ENDPOINT> -u admin -p unicorn_customization```
+
 You can require SSL connections for specific users accounts\. For example, you can use one of the following statements on the user account `encrypted_user`\.
 
 
@@ -82,7 +86,7 @@ SET PASSWORD FOR 'encrypted_user'@'%' = PASSWORD('Corp123!');
 
 Exit the SQL connection for admin and attempt to establish an unencrypted connection with the encrypted_user account with the following command. Replace the Aurora endpoint with the one the primary instance endpoint copied into your scratch pad from the previous step.
 
-`mysql -h <YOUR-AURORA-PRIMARY-INSTANCE-ENDPOINT> -u encrypted_user -p`
+`mysql -h <YOUR-AURORA-PRIMARY-INSTANCE-ENDPOINT> -u encrypted_user -p unicorn_customization`
 
 You should be prompted with a password. Use `Corp123!`
 This connection attempt should work. Type `exit` to drop the mysql connection.
