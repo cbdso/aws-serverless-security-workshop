@@ -93,7 +93,7 @@ Once this is done, you should be able to connect to the database using SSL. Test
 
 ## Connecting with SSL in the Console
 
-Take note that if you need establish a mysql connection via console, it will also now require encryption in transit.
+Take note that if you need to establish a mysql connection via console, it will also now require encryption in transit.
 Try it out and make sure you can connect successfully.
 
 First try connecting without SSL:
