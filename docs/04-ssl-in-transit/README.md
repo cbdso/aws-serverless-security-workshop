@@ -75,16 +75,17 @@ First, establish a mysql connection with the admin account:
 
 ```mysql -h <YOUR-AURORA-PRIMARY-INSTANCE-ENDPOINT> -u admin -p unicorn_customization```
 
-You can require SSL connections for specific users accounts\. For example, you can use one of the following statements on the user account `encrypted_user`\.
+You can require SSL connections for specific users accounts\. For example, we can require the `admin` account our application uses to connect to the database use SSL \.
 
 
 ```
-GRANT SELECT ON *.* TO 'encrypted_user'@'%';
-SET PASSWORD FOR 'encrypted_user'@'%' = PASSWORD('Corp123!');    
+ALTER USER 'admin'@'%' REQUIRE SSL;  
 ```
 
 
-Exit the SQL connection for admin and attempt to establish an unencrypted connection with the encrypted_user account with the following command. Replace the Aurora endpoint with the one the primary instance endpoint copied into your scratch pad from the previous step.
+Exit the SQL connection for admin when done.
+
+![](images/require_ssl.png)
 
 `mysql -h <YOUR-AURORA-PRIMARY-INSTANCE-ENDPOINT> -u encrypted_user -p unicorn_customization`
 
