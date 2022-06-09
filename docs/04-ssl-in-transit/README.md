@@ -89,11 +89,12 @@ cd ~/environment/aws-serverless-security-workshop/src
 aws cloudformation package --output-template-file packaged.yaml --template-file template.yaml --s3-bucket $BUCKET --s3-prefix securityworkshop --region $REGION &&  aws cloudformation deploy --template-file packaged.yaml --stack-name $STUDENT-CustomizeUnicorns --region $REGION --capabilities CAPABILITY_IAM --parameter-overrides InitResourceStack=$STUDENT
 ```
 
-Once this is done, you should be able to connect to the database using SSL.
+Once this is done, you should be able to connect to the database using SSL. Test out a few API endpoints again in browser or with Postman. They should now work.
 
-## Ensure SSL - Optional step (CONSIDER REMOVE??? STACK DOES NOT INCLUDE encrypted_user account)
+## Connecting with SSL in the Console
 
-First, establish a mysql connection with the admin account:
+Take note that if you need establish a mysql connection via console, it will also now require encryption in transit.
+Try it out and make sure you can connect successfully.
 
 ```mysql -h <YOUR-AURORA-PRIMARY-INSTANCE-ENDPOINT> -u admin -p unicorn_customization```
 
@@ -114,7 +115,7 @@ Exit the SQL connection for admin when done.
 You should be prompted with a password. Use `Corp123!`
 This connection attempt should work. Type `exit` to drop the mysql connection.
 	
-After entering your password, it should fail with ERROR 1045 (28000): Access denied for user 'encrypted_user'@'10.0.1.156' (using password: YES). This is because an encrypted connection is expected and required for this account.
+After entering your password, it should fail with `ERROR 1045 (28000): Access denied for user 'encrypted_user'@'10.0.1.156' (using password: YES)`\. This is because an encrypted connection is expected and required for this account.
 
 **PW Notes: Verify SSL Login Steps--may need to check if complete**
 Connect to your database this time using encryption with the following command. Replace the Aurora endpoint with the one the primary instance endpoint copied into your scratch pad from Step 5.
