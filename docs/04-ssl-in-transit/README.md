@@ -101,7 +101,7 @@ First try connecting without SSL:
 ```mysql -h <YOUR-AURORA-PRIMARY-INSTANCE-ENDPOINT> -u admin -p unicorn_customization```
 
 	
-After entering your password (if you have enabled secret rotation, make sure the secret is correct by checking Secrets Manager), it should fail with `ERROR 1045 (28000): Access denied for user 'encrypted_user'@'10.0.1.156' (using password: YES)`\. This is because an encrypted connection is expected and required for this account.
+After entering your password (if you have enabled secret rotation, make sure the secret is correct by checking Secrets Manager), it should fail with `ERROR 1045 (28000): Access denied for user 'admin'@'10.0.1.156' (using password: YES)`\. This is because an encrypted connection is expected and required for this account.
 
 
 Connect to your database this time using encryption with the following command. Replace the Aurora endpoint with the one the primary instance endpoint copied into your scratch pad from Step 5.
