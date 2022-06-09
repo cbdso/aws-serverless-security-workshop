@@ -2,6 +2,28 @@
 
 Although we are using VPC and traffic is private within it, some regulations or compliance requirements might require encryption in transit. This encryption secures the data when communicating with the database. 
 
+## Require SSL 
+
+First, let's make it so that our account used for database connections are required to use SSL. Establish a mysql connection with the admin account:
+
+```mysql -h <YOUR-AURORA-PRIMARY-INSTANCE-ENDPOINT> -u admin -p unicorn_customization```
+
+You can require SSL connections for specific users accounts\. For example, we can require the `admin` account our application uses to connect to the database use SSL \.
+
+
+```
+ALTER USER 'admin'@'%' REQUIRE SSL;  
+```
+
+
+Exit the SQL connection for admin when done.
+
+![](images/require_ssl.png)
+
+Test out a few API endpoints in Postman or in browser. The calls should fail with `"Error querying"` as it is expecting an encrpyred connection but our application is not yet configured for it. 
+
+## Configure SSL In-Transit
+
 Go to *dbUtils.js* to add a new property to your database connection. Under the method ***getDbConfig***, within the resolve object (a JSON object), add a new line to the JSON:
 
 ```
