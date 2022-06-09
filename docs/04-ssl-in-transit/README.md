@@ -20,7 +20,7 @@ Exit the SQL connection for admin when done.
 
 ![](images/require_ssl.png)
 
-Test out a few API endpoints in Postman or in browser. The calls should fail with `"Error querying"` as it is expecting an encrpyred connection but our application is not yet configured for it. 
+Test out a few API endpoints in Postman or in browser. The calls should fail with `"Error querying"` as it is expecting an encrypted connection but our application is not yet configured for it. 
 
 ## Configure SSL In-Transit
 
