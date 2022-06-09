@@ -106,7 +106,7 @@ After entering your password (if you have enabled secret rotation, make sure the
 
 Connect to your database this time using encryption with the following command. Replace the Aurora endpoint with the one the primary instance endpoint copied into your scratch pad from Step 5.
 
-```mysql -h <YOUR-AURORA-PRIMARY-INSTANCE-ENDPOINT> -u admin --ssl-ca=/home/ec2-user/environment/aws-serverless-security-workshop/src/app/assets/rds-ca-2019-root.pem -p```
+```mysql -h <YOUR-AURORA-PRIMARY-INSTANCE-ENDPOINT> -u admin --ssl-ca=/home/ec2-user/environment/aws-serverless-security-workshop/src/app/assets/rds-ca-2019-root.pem -p unicorn_customization```
 
 You should be prompted with a password. After entering your password, it should login successfully and present with a `mysql>` prompt.
 
