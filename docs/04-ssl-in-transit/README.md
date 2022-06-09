@@ -96,33 +96,19 @@ Once this is done, you should be able to connect to the database using SSL. Test
 Take note that if you need establish a mysql connection via console, it will also now require encryption in transit.
 Try it out and make sure you can connect successfully.
 
+First try connecting without SSL:
+
 ```mysql -h <YOUR-AURORA-PRIMARY-INSTANCE-ENDPOINT> -u admin -p unicorn_customization```
 
-You can require SSL connections for specific users accounts\. For example, we can require the `admin` account our application uses to connect to the database use SSL \.
-
-
-```
-ALTER USER 'admin'@'%' REQUIRE SSL;  
-```
-
-
-Exit the SQL connection for admin when done.
-
-![](images/require_ssl.png)
-
-`mysql -h <YOUR-AURORA-PRIMARY-INSTANCE-ENDPOINT> -u encrypted_user -p unicorn_customization`
-
-You should be prompted with a password. Use `Corp123!`
-This connection attempt should work. Type `exit` to drop the mysql connection.
 	
-After entering your password, it should fail with `ERROR 1045 (28000): Access denied for user 'encrypted_user'@'10.0.1.156' (using password: YES)`\. This is because an encrypted connection is expected and required for this account.
+After entering your password (if you have enabled secret rotation, make sure the secret is correct by checking Secrets Manager), it should fail with `ERROR 1045 (28000): Access denied for user 'encrypted_user'@'10.0.1.156' (using password: YES)`\. This is because an encrypted connection is expected and required for this account.
 
-**PW Notes: Verify SSL Login Steps--may need to check if complete**
+
 Connect to your database this time using encryption with the following command. Replace the Aurora endpoint with the one the primary instance endpoint copied into your scratch pad from Step 5.
 
-mysql -h <YOUR-AURORA-PRIMARY-INSTANCE-ENDPOINT> -u encrypted_user --ssl-ca=/home/ec2-user/environment/aws-serverless-security-workshop/src/app/assets/rds-ca-2019-root.pem -p
+```mysql -h <YOUR-AURORA-PRIMARY-INSTANCE-ENDPOINT> -u admin --ssl-ca=/home/ec2-user/environment/aws-serverless-security-workshop/src/app/assets/rds-ca-2019-root.pem -p```
 
-You should be prompted with a password. Use Corp123! After entering your password, it should login successfully and present with a mysql> prompt.
+You should be prompted with a password. After entering your password, it should login successfully and present with a `mysql>` prompt.
 
 ## Next step 
 You have now further secured your data by enabling encryption in transit for your database connection! 
