@@ -4,7 +4,7 @@ Although we are using VPC and traffic is private within it, some regulations or 
 
 ## Require SSL 
 
-First, let's make it so that our account used for database connections are required to use SSL. Establish a mysql connection with the admin account (remember for the password if it has rotated, you will need to look up the updated secret in Secrets Manager):
+First, let's make it so that our account used for database connections are required to use SSL. Establish a mysql connection with the admin account *(remember for the password if it has rotated, you will need to look up the updated secret in Secrets Manager)*:
 
 ```mysql -h <YOUR-AURORA-PRIMARY-INSTANCE-ENDPOINT> -u admin -p unicorn_customization```
 
