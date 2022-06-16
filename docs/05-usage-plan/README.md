@@ -19,7 +19,7 @@ To tally the number of requests based on the caller, API Gateway uses API Keys t
 	
 	Click **Next**
 	
-1. Associate the API created previously (in instructor led workshop, follows USERNAME-CustomizeUnicorns convention) with the usage plan. Pick `dev` stage
+1. Add API Stage and Associate the API created previously (in instructor led workshop, follows USERNAME-CustomizeUnicorns convention) with the usage plan. Pick `dev` stage
 
 	![add stage to Usage plan](images/add-apig-stage.png)
 	
