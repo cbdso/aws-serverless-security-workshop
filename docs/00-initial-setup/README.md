@@ -356,9 +356,8 @@ In addition to the lambda code, the configurations for Lambda function and the R
   </tr>
 </table>
 
-## Module-0E: This Section Under Construction. SKIP to Module-0F
-<!---
-THIS SECTION NEEDS UPDATES FOR AWS TOOLKIT
+## Module-0E: Update dbUtils.js
+
 
 1. After reviewing the code, under **src/app/dbUtils.js**, replace the *host* with the Aurora endpoint. Then save the file (⌘+s for Mac or Ctrl+s for Windows or File -> Save)
    
@@ -370,7 +369,10 @@ THIS SECTION NEEDS UPDATES FOR AWS TOOLKIT
    
    When you successfully save the changes, the dot will turn green and then disappear.
 
-   After doing this, it's time to test your API locally using SAM Local. 
+<!---
+THIS SECTION NEEDS UPDATES FOR AWS TOOLKIT
+	
+	After doing this, it's time to test your API locally using SAM Local. 
 
 1. On the **right panel**, click on **AWS Resources**. 
 
