@@ -177,7 +177,7 @@ Now let's start creating an AWS WAF to give us additional protection:
 1. Next, we create the rule for SQL injection. 
 
 	* Click **Create Rule** 
-	* Give it a unique name prefixed with your username, like `USERNAME-SQLinjectionRule`
+	* Give it a unique name prefixed with your username, like `USERNAME-SQLinjectionMatchRule`
 	* For **Rule type**, keep `Regular rule`
 	* In Add conditions section, select 
 		* 	`does`
