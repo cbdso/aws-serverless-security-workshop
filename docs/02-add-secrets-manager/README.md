@@ -18,23 +18,23 @@ First thing we need to do is create a secret in Secrets Manager.
 2. Select ***Credentials for RDS database*** type of secret. Fill it with these values:
 	- Username: `admin`
 	- Password: `Corp123!`
-	- Select the encryption key: `DefaultEncryptionKey`.
+	- Select the encryption key: `aws/secretsmanager`.
 	![AWS Secrets Manager - Secret](images/01-store-new-secret.png)
-	- Select your Aurora cluster (starts with `secure-serverless-aurora`)
+	- Select your Aurora cluster (starts with `USERNAME-serverless-security-aurora`)
 
 		<img src="images/02-secret-select-db.png" width="60%"/>
 	
-1. Click on *Next* and continue fill the wizard with the following values.
-	- Secret name: `secure-serverless-db-secret`
+1. Click on *Next* and continue fill the wizard with the following values. **If in a group workshop course, PREFIX with your username to create a unique value that won't conflict with others**
+	- Secret name: `<YOUR USERNAME>/secure-serverless-db-secret`
 	- Description: Use an optional description here.
 	![Secret name](images/03-secret-name.png)
 1. Again, click on *Next* and configure your rotation.
-	- Click on `Enable Rotation`
+	- Enable  `Automatic Rotation`
 	- Select `30 Days` as the rotation interval.
-	- Choose **Create a new Lambda Function to perform rotation**
-	- Give the lambda function a name, e.g. `aurora-rotation`
-	- Select **Use this secret** 
-	![Rotation](images/04-rotation.png)
+	- Choose **Create a rotation function**
+	- Give the lambda function a unique name prefixed with your USERNAME, e.g. `USERNAME-aurora-rotation`
+	- Select **No (Do not use separate credentials)**  for the purpose of this workshop. In practice, the credentials used to grant access to the database shouldn't have permissions to change its own password.
+	![Rotation](images/04-rotation.png) 
 1. Then, click *Next* and, if you want, review the example code. During the next sections we will modify our code to use Secrets Manager and this code will be used as an example.
 1. Finally, click *Store*.
 
@@ -63,7 +63,7 @@ In `src/template.yaml`, look for the block below that defines policies for Secre
 
 &#9888; **Note: ENSURE YOU REPLACE ALL 3 OCCURRENCES**!  &#9888;  
 
-Also, note that in the **Globals** section we are referencing the name of the secret
+Also, note that in the **Globals** section we are referencing the name of the secret. **REPLACE 'secure-serverless-db-secret' with the actual name of the Secret used. For instructor-led courses, the convention used would be** `<YOUR USERNAME>/secure-serverless-db-secret`
 
 ```
 Globals:
@@ -158,7 +158,7 @@ Now it's time to deploy again and test the application:
 1.  Deploy the updates by running:
 
 	```
-	 aws cloudformation package --output-template-file packaged.yaml --template-file template.yaml --s3-bucket $BUCKET --s3-prefix securityworkshop --region $REGION &&  aws cloudformation deploy --template-file packaged.yaml --stack-name CustomizeUnicorns --region $REGION --capabilities CAPABILITY_IAM --parameter-overrides InitResourceStack=Secure-Serverless
+	 aws cloudformation package --output-template-file packaged.yaml --template-file template.yaml --s3-bucket $BUCKET --s3-prefix securityworkshop --region $REGION &&  aws cloudformation deploy --template-file packaged.yaml --stack-name $STUDENT-CustomizeUnicorns --region $REGION --capabilities CAPABILITY_IAM --parameter-overrides InitResourceStack=$STUDENT
 	```
 
 

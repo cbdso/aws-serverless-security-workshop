@@ -5,10 +5,10 @@ You can leverage Usage Plans with Amazon API Gateway to set limits on request ra
 To tally the number of requests based on the caller, API Gateway uses API Keys to keep track of different consumers for your API. In our use case, requests coming from different companies can be calculated separately. 
 
 ## Module 5A: Create an API Gateway usage plan 
-1. In the API Gateway console, go to **Usage Plans** tab, and click **Create** 
-1. Fill in the details for the usage plan 
+1. In the API Gateway console, select the API you created (e.g. USERNAME-CustomizeUnicorns), go to **Usage Plans** tab, and click **Create** 
+1. Fill in the details for the usage plan, ensuring to create a unique name for your usage plan: 
 	
-	* **Name**: ```Basic```
+	* **Name**: ```<Your Username>-Basic```
 	* **Description** : ```Basic usage plan for Unicorn customization partners```
 	* **Enable throttling**: check yes
 	* **Throttling Rate** : ```1``` request per second
@@ -19,7 +19,7 @@ To tally the number of requests based on the caller, API Gateway uses API Keys t
 	
 	Click **Next**
 	
-1. Associate the API we created previously with the usage plan. Pick `dev` stage. 
+1. Add API Stage and Associate the API created previously (in instructor led workshop, follows USERNAME-CustomizeUnicorns convention) with the usage plan. Pick `dev` stage
 
 	![add stage to Usage plan](images/add-apig-stage.png)
 	
@@ -35,7 +35,7 @@ To tally the number of requests based on the caller, API Gateway uses API Keys t
 	<details>
 	<summary><strong> If you have not done module 1, expand for instructions here </strong></summary>
 
-	* For Name, pick any name e.g.  `cherry company`. 
+	* For Name, pick any name e.g.  `USERNAME cherry company`. 
 	* For API Key, select **Auto Generate**
 	* Click **Save**
 
@@ -48,7 +48,7 @@ To tally the number of requests based on the caller, API Gateway uses API Keys t
 	
 	For our application, we are going to reuse the value of the ClientID of the customer as the value for the API Key, to keep down the number of random strings that customers have to remember. 
 	
-	* For Name, use the company name you created in **Module 1: Auth**. 
+	* For Name, you can use the company name you created in **Module 1: Auth**, but **ensure you prefix it with your username so it can be easily identified in a group workshop setting** 
 	* For API Key, select **Custom** so we can import the value
 	* In the inputbox that comes up, use the same value as the ClientID of the company (if you forgot it, you can retrieve it from the Cognito console and look under **App clients** tab
 	* Click **Save**
@@ -153,10 +153,10 @@ Now, deploy the changes and verify:
 1.  Deploy the updates:
 
 	```
-	 aws cloudformation package --output-template-file packaged.yaml --template-file template.yaml --s3-bucket $BUCKET --s3-prefix securityworkshop --region $REGION &&  aws cloudformation  deploy --template-file packaged.yaml --stack-name CustomizeUnicorns --region $REGION --parameter-overrides InitResourceStack=Secure-Serverless --capabilities CAPABILITY_IAM
+	 aws cloudformation package --output-template-file packaged.yaml --template-file template.yaml --s3-bucket $BUCKET --s3-prefix securityworkshop --region $REGION &&  aws cloudformation deploy --template-file packaged.yaml --stack-name $STUDENT-CustomizeUnicorns --region $REGION --capabilities CAPABILITY_IAM --parameter-overrides InitResourceStack=$STUDENT
 	```
 
-1. Once the deployment completes, you can go the [API Gateway console](https://console.aws.amazon.com/apigateway/home), navigate to the **CustomizeUnicorns API** -> **Resources** --> Pick an method --> click on **Method Request**. 
+1. Once the deployment completes, you can go the [API Gateway console](https://console.aws.amazon.com/apigateway/home), navigate to your API **(e.g. USERNAME-CustomizeUnicorns API)**,  **Resources** --> Pick an method --> click on **Method Request**. 
 
 	You should now see the **API Key Required** field set to `true`
 
@@ -218,7 +218,7 @@ To make this work:
 1.  Deploy the updates:
 
 	```
-	 aws cloudformation package --output-template-file packaged.yaml --template-file template.yaml --s3-bucket $BUCKET --s3-prefix securityworkshop --region $REGION &&  aws cloudformation  deploy --template-file packaged.yaml --stack-name CustomizeUnicorns --region $REGION --parameter-overrides InitResourceStack=Secure-Serverless --capabilities CAPABILITY_IAM
+	 aws cloudformation package --output-template-file packaged.yaml --template-file template.yaml --s3-bucket $BUCKET --s3-prefix securityworkshop --region $REGION &&  aws cloudformation deploy --template-file packaged.yaml --stack-name $STUDENT-CustomizeUnicorns --region $REGION --capabilities CAPABILITY_IAM --parameter-overrides InitResourceStack=$STUDENT
 	```
 
 1. Once the deployment finishes, test making API requests again with postman. You should now be able to remove the `x-api-key` request header and the request should be able to succeed. 
@@ -231,9 +231,9 @@ To make this work:
 
 You can use postman to send multiple API requests in sequence. 
 
-1. In postman, click on **Runner**
+1. In postman, click on the ellipses (3 dots) next to your collection (e.g. Customize_Unicorns) and click **Run Collection**
 
-1. Pick the `List customization options` folder to run
+1. Pick the APIs from `List customization options` folder to run (i.e. GET Socks-List, GET Horns-List, GET Glasses-List, GET Capes-List)
 
 1. Select the `dev` environment and set runner to run 10 iterations
 

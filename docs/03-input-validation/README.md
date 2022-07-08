@@ -25,7 +25,8 @@ This information should be in our request body to create a new customization tha
 
 By leveraging input validation on API Gateway, you can enforce required parameters and regex patterns each parameter must adhere to. This allows you to remove boilerplate validation logic from backend implementations and focus on actual business logic and deep validation.
 
-## Module 3 - Optional: attack your API with SQL injection! 
+<!---
+## Module 3 - Optional: attack your API with SQL injection! (CONSIDER REMOVING)
 
 If you haven't completed **Module 6: WAF**, your serverless API is currently vulnerable to SQL injection attacks. This optional module shows how you can perform the attack. 
 
@@ -87,6 +88,7 @@ If you look at the SQL injection statement we just performed, it's adding a bad 
 ![](images/3A-after-injection.png)
 
 </details>
+--->
 
 ## Module 3A: Create a model for your Customizations
 
@@ -147,7 +149,7 @@ For our **POST /customizations** API, we are going to use the following model:
 Now, follow these steps:
 
 1. Go to API Gateway console.
-2. Click on the API **CustomizeUnicorns**
+2. Click on the API you created **USERNAME-CustomizeUnicorns**
 3. Click on **Models**
 4. Click on **Create** and create a model with the following values:
 	- Model name: `CustomizationPost`
@@ -159,7 +161,7 @@ Now, follow these steps:
 
 Once we have created our model, we need to apply it to our customizations/post method.
 
-1. Within the API Gateway Console, click on CustomizeUnicorns, **Resources**
+1. Within the API Gateway Console, click on USERNAME-CustomizeUnicorns, **Resources**
 1. Click under /customizations --> **POST** method
 
 	![Customizations ](images/06_customizations.png)
@@ -174,13 +176,12 @@ Once we have created our model, we need to apply it to our customizations/post m
 	
 	> On step number 2 you might have noticed that we can also validate query parameters and request headers in addition to request body. This is really useful when our application uses both at the same time and we want to have complex validations. If you want to find more information, [here](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-method-request-validation.html) is our documentation about this.
 
-	1. Now it's time to deploy and test! Go to the **Actions** menu and click on **Deploy API**. Select `dev` as the **Deployment stage** and confirm by clicking **Deploy**.
+1. Now it's time to deploy and test! Go to the **Actions** menu and click on **Deploy API**. Select `dev` as the **Deployment stage** and confirm by clicking **Deploy**.
 
 ## Module 3B: Test your Validation
 
 Use postman, you can try making requests to the **POST /customizations** API using invalid parameters and see the input validation kick in (if you get an unauthorize error message, could be caused by the expiration time of the Authentication token. You can easily refresh rthis token following these steps from module [01](../01-add-authentication/README.md#1E): 
 
-### Wrong parameters = Invalid request:
 
 Here are some example request bodies that fail:
 

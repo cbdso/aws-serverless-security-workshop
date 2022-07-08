@@ -49,7 +49,7 @@ Quick links to submodules:
 
 1. To configure the Cognito User Pool with a domain, go to the [Cognito management console](https://console.aws.amazon.com/cognito/home), and click on **Manage User Pools**
 
-1. Click on the user pool created by the SAM Template (`src/template.yaml`). It should be named "**CustomizeUnicorns-users**"
+1. Click on the user pool created by the SAM Template (`src/template.yaml`). In an instructor-led workshop where environments are pre-provisioned, this should be named "**USERNAME-CustomizeUnicorns-users**". Make sure to select the user pool with your prefixed USERNAME!
 
 1. Under **App Integration**, go to the **Domain Name** tab to set up an unique Cognito domain our API consumers will use for authentication requests.
 
@@ -107,7 +107,7 @@ So now, let's get you a set of admin credentials with the `WildRydes/ManagePartn
 
 1. Click **Add an app client**
 
-1. Use `Admin` for app client name (For the **Auth Flows Configuration** section, you can either uncheck the ALLOW_CUSTOM_AUTH and ALLOW_USER_SRP_AUTH or leave it enabled)
+1. Use `Admin` for app client name (For the **Auth Flows Configuration** section, you can either uncheck the ALLOW_CUSTOM_AUTH and ALLOW_USER_SRP_AUTH or leave it enabled. **Enable token revocation** under **Advanced Token Settings** can also be checked.)
 
 	![add admin](images/cognito-add-admin.png)
 
@@ -325,14 +325,15 @@ We need to configure a [**Lambda authorizer**](https://docs.aws.amazon.com/apiga
 	```
 	
 	otherwise, fix the syntax error before continuing to next step
-
+	
+	
 1.  Deploy the updates by running the same commands we used in module 0 to deploy the application:
 
 	```
-	 aws cloudformation package --output-template-file packaged.yaml --template-file template.yaml --s3-bucket $BUCKET --s3-prefix securityworkshop --region $REGION &&  aws cloudformation deploy --template-file packaged.yaml --stack-name CustomizeUnicorns --region $REGION --capabilities CAPABILITY_IAM --parameter-overrides InitResourceStack=Secure-Serverless
+	 aws cloudformation package --output-template-file packaged.yaml --template-file template.yaml --s3-bucket $BUCKET --s3-prefix securityworkshop --region $REGION &&  aws cloudformation deploy --template-file packaged.yaml --stack-name $STUDENT-CustomizeUnicorns --region $REGION --capabilities CAPABILITY_IAM --parameter-overrides InitResourceStack=$STUDENT
 	```
 
-1. After the SAM template has finished updating, go to the [API Gateway console](https://console.aws.amazon.com/apigateway) and click into the API we just updated. Under **Resources**, choose any method in the API, and you should see **Auth: CustomAuthorizer** under **Method Request**:
+1. After the SAM template has finished updating, go to the [API Gateway console](https://console.aws.amazon.com/apigateway) and click into the API we just updated (**make sure to select the correct one**). Under **Resources**, choose any method in the API, and you should see **Auth: CustomAuthorizer** under **Method Request**:
 
 	![verify API gateway authorizer](images/1C-verify-API-authorizer.png)
 
@@ -347,12 +348,11 @@ Now we have configured our API so only authenticated requests can get through to
 
 To make authenticated requests using the admin client credentials we just created in Module 1C, we can use PostMan:
 
-1. In Postman, right click on the **Manage Partner** folder and click **edit**
-1. In the Edit Folder window that pops up, go to **Authorization** tab, and change the Auth **Type** to `OAuth 2.0`, then click **Get New Access Token** 
+1. In Postman, click on the **Manage Partner** folder 
+1. In the Edit Folder window that pops up, go to **Authorization** tab, and change the Auth **Type** to `OAuth 2.0`
 
-	![postman add auth](images/1E-postman-add-auth.png)
 
-1. Configure the token request:
+1. Scroll down to "Configure New Token" and Configure the new token request:
 	
 	* **Name**: `admin`
 	
@@ -365,13 +365,16 @@ To make authenticated requests using the admin client credentials we just create
 	* **Client Secret**:  this the client secret of the admin we created in Module 1D
 	* **Scope**: it's optional (the token will be scoped anyways) we can leave it blank
 		
+	![postman add auth](images/1E-postman-add-auth.png)
 	![postman add auth](images/1E-postman-gettoken.png)
 
-	And click **Request Token**
+	And click **Get New Access Token**.
+	
+	For the purposes of the workshop (not recommended for on-the-job use), if there is an error retrieving the token, try going to **File->Settings** and make sure **SSL certificate verification** is **OFF**. Alternatively, if in a registered workshop class, check course materials for configuration instructions.
 
-1. Now you should see the new token returned from Cognito. scroll down and click **Use Token**
+1. Now you should see the new token returned from Cognito. Click **Use Token**
 
-1. Back to the Edit Folder window, click **update**
+1. Back to the Edit Folder window, click **Save**
 
 1. Now, go to the **POST Create Partner** API in the **Manage Partner** Folder in the left hand toolbar
 
@@ -386,21 +389,23 @@ To make authenticated requests using the admin client credentials we just create
 Now we have a set of client credentials for the partner company you just registered. Let's pretend to be "Cherry company" (or whatever company you just registered) and submit some unicorn customizations!
 
 
-1. Request an access token from the new company client credentials you just generated. (You will notice this is very similar steps as you did in [module 1E](#1E)!
+1. Request an access token from the new company client credentials you just generated. (You will notice this is very similar steps as you did in [module 1E](#1E)!)
 
-	1. Right click on the **Customize_Unicorns** collection and **edit**
+	1. Click on the **Customize_Unicorns** collection and view the **Authorization** tab
 
-		> Ensure to right click on the overarching **Customize_Unicorns** collection rather than any of the subfolders. Doing so will set the default authorization header to use for any API in the collection, unless overridden by the sub-folders (as we just did in module 1E)
+		> Ensure to click on the overarching **Customize_Unicorns** collection rather than any of the subfolders. Doing so will set the default authorization header to use for any API in the collection, unless overridden by the sub-folders (as we just did in module 1E)
 		
-	1. Go to **Authorization** tab, pick Oauth2.0
-	1. Use the same Cognito token url (hint: Cognito domain + `/oauth2/token`)
+	1. On the **Authorization** tab, pick Oauth2.0
+	1. Scroll down to **Configure New Token** and use the same Cognito token url (hint: Cognito domain + `/oauth2/token`)
 	1. Use the Client ID generated from the **POST /partner** API you just created from step [module 1E](#1E)
 
 		> Tip: if you forget the client ID/secret, you can also retrieve it from the Cognito User pool console under **App clients**
 	
 		![](images/1F-get-token-for-company.png)
+		
 
-1. Test making a request for describing sock customziation options again. It should succeed this time!
+
+1. SAVE and Test making a request for describing sock customziation options again. It should succeed this time!
 
 1. Now you can create a unicorn customziation! Choose the **POST create Custom_Unicorn** API from the collection, in the **Body** tab, enter 
 

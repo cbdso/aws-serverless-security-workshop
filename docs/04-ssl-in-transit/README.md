@@ -2,6 +2,28 @@
 
 Although we are using VPC and traffic is private within it, some regulations or compliance requirements might require encryption in transit. This encryption secures the data when communicating with the database. 
 
+## Require SSL 
+
+First, let's make it so that our account used for database connections are required to use SSL. Establish a mysql connection with the admin account *(remember for the password if it has rotated, you will need to look up the updated secret in Secrets Manager)*:
+
+```mysql -h <YOUR-AURORA-PRIMARY-INSTANCE-ENDPOINT> -u admin -p unicorn_customization```
+
+You can require SSL connections for specific users accounts\. For example, we can require the `admin` account our application uses to connect to the database use SSL \.
+
+
+```
+ALTER USER 'admin'@'%' REQUIRE SSL;  
+```
+
+
+Exit the SQL connection for admin when done.
+
+![](images/require_ssl.png)
+
+Test out a few API endpoints in Postman or in browser. The calls should fail with `"Error querying"` as it is expecting an encrypted connection but our application is not yet configured for it. 
+
+## Configure SSL In-Transit
+
 Go to *dbUtils.js* to add a new property to your database connection. Under the method ***getDbConfig***, within the resolve object (a JSON object), add a new line to the JSON:
 
 ```
@@ -64,32 +86,29 @@ Finally, deploy these changes:
 
 ```bash
 cd ~/environment/aws-serverless-security-workshop/src
-aws cloudformation package --output-template-file packaged.yaml --template-file template.yaml --s3-bucket $BUCKET --s3-prefix securityworkshop --region $REGION &&  aws cloudformation deploy --template-file packaged.yaml --stack-name CustomizeUnicorns --region $REGION --capabilities CAPABILITY_IAM --parameter-overrides InitResourceStack=Secure-Serverless
+aws cloudformation package --output-template-file packaged.yaml --template-file template.yaml --s3-bucket $BUCKET --s3-prefix securityworkshop --region $REGION &&  aws cloudformation deploy --template-file packaged.yaml --stack-name $STUDENT-CustomizeUnicorns --region $REGION --capabilities CAPABILITY_IAM --parameter-overrides InitResourceStack=$STUDENT
 ```
 
-Once this is done, you should be able to connect to the database using SSL.
+Once this is done, you should be able to connect to the database using SSL. Test out a few API endpoints again in browser or with Postman. They should now work.
 
-## Ensure SSL - Optional step
+## Connecting with SSL in the Console
 
-You can require SSL connections for specific users accounts\. For example, you can use one of the following statements, depending on your MySQL version, to require SSL connections on the user account `encrypted_user`\.
+Take note that if you need to establish a mysql connection via console, it will also now require encryption in transit.
+Try it out and make sure you can connect successfully.
 
-For MySQL 5\.7 and later:
+First try connecting without SSL:
 
-```
-ALTER USER 'encrypted_user'@'%' REQUIRE SSL;            
-```
+```mysql -h <YOUR-AURORA-PRIMARY-INSTANCE-ENDPOINT> -u admin -p unicorn_customization```
 
-For MySQL 5\.6 and earlier:
+	
+After entering your password (if you have enabled secret rotation, make sure the secret is correct by checking Secrets Manager), it should fail with `ERROR 1045 (28000): Access denied for user 'admin'@'10.0.1.156' (using password: YES)`\. This is because an encrypted connection is expected and required for this account.
 
-```
-GRANT USAGE ON *.* TO 'encrypted_user'@'%' REQUIRE SSL;            
-```
 
-For more information on SSL connections with MySQL, go to the [MySQL documentation](https://dev.mysql.com/doc/refman/5.6/en/secure-connections.html)\.
+Connect to your database this time using encryption with the following command. Replace the Aurora endpoint with the one the primary instance endpoint copied into your scratch pad from Step 5.
 
-To find the MySQL version of the Aurora database, go to the RDS console and find the **Engine version** under **Configuration** tab of the database cluster:
+```mysql -h <YOUR-AURORA-PRIMARY-INSTANCE-ENDPOINT> -u admin --ssl-ca=/home/ec2-user/environment/aws-serverless-security-workshop/src/app/assets/rds-ca-2019-root.pem -p unicorn_customization```
 
-![](images/check-engine-version.png)
+You should be prompted with a password. After entering your password, it should login successfully and present with a `mysql>` prompt.
 
 ## Next step 
 You have now further secured your data by enabling encryption in transit for your database connection! 
